@@ -1,5 +1,7 @@
-import UserList from "./pages/UserList";
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+import UserProfile from "./pages/UserProfile";
+import UserList from "./pages/UserList";
 
 function Home() {
   return <div className="p-8 text-xl">Welcome to the User App!</div>;
@@ -19,6 +21,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<UserList />} />
+        <Route path='/users/:userId' element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );

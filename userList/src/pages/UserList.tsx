@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 interface User {
     id: string;
@@ -9,7 +9,17 @@ interface User {
 }
 
 function createUserElement(user: User) {
-    return (<></>);
+    return (
+    <div key={user.id} className='flex flex-col gap-2 m-3'>
+        <span>
+            {user.username}
+        </span>
+        <span>{user.email}</span>
+        <NavLink to={`/users/${user.id}`}>
+        View Profile
+        </NavLink>
+    </div>
+    );
 }
 
 
@@ -26,8 +36,9 @@ export default function UserList() {
     
     
     return (
-        <div className='grid-cols-2'>
-            {users.map(createUserElement)}
+        <div className='grid-rows-2 gap-5'>
+            <h1>Users</h1>
+                {users.map(createUserElement)}
         </div>
     );
 }
