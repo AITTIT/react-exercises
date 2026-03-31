@@ -7,9 +7,9 @@ function App() {
 
   return (
     <>
-    <AppleButton />
-    <AppleBasket />
-    <MovieList />
+      <AppleButton />
+      <AppleBasket />
+      <MovieList />
     </>
   );
 }
