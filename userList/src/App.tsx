@@ -9,10 +9,9 @@ function Home() {
 
 export default function App() {
   return (
-    // BrowserRouter wraps the entire application
     <BrowserRouter>
       {/* Navigation - The Link component replaces the traditional <a> tag */}
-      <nav className="p-4 bg-zinc-800 text-white flex gap-4">
+      <nav className="p-4 bg-zinc-800 text-white flex gap-6 text-xl">
         <Link to="/" className="hover:text-blue-300">Home</Link>
         <Link to="/users" className="hover:text-blue-300">Users</Link>
       </nav>
