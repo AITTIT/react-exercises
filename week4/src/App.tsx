@@ -1,0 +1,90 @@
+import { useState } from "react";
+import Modal from "./components/Modal";
+
+// Fake data: Camping gear and their weights in grams
+const CAMPING_GEAR = [
+  { id: 1, name: 'Tent', weight: 3500 },
+  { id: 2, name: 'Sleeping Bag', weight: 1200 },
+  { id: 3, name: 'Camping Stove', weight: 800 }
+];
+
+export default function App() {
+  // 1. State for the Modal's visibility (open/closed)
+  const [isOpen, setIsOpen] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo2, setShowInfo2] = useState(false);
+
+  // 2. Reduce math: 
+  // The function calculates the accumulating sum and the current item together. Initial value is 0.
+  const totalWeight = CAMPING_GEAR.reduce((sum, item) => sum + item.weight, 0);
+  
+  return (
+    <div className="p-8">
+      <h2 className="text-2xl font-bold mb-4">Camping Trip Summary</h2>
+
+      <p className="text-xl font-black text-blue-600 mb-4">
+        Backpack weight: {totalWeight} g
+      </p>
+
+      {/* Button that changes the state to true and "opens" the window */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="bg-zinc-800 text-white px-4 py-2 rounded shadow hover:bg-zinc-700"
+      >
+        View Equipment
+      </button>
+
+      {/* 3. Condition Rendering (&&) for the Modal 
+            This black, full-screen background (fixed inset-0) is drawn
+            on the screen ONLY when the isOpen state is true! */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-xl shadow-2xl w-80">
+            <h3 className="text-xl font-bold mb-4">Packed items</h3>
+            <ul className="mb-7 space-y-2">
+              {CAMPING_GEAR.map(item => (
+                <li key={item.id} className="border-b pb-1 flex justify-between">
+                  <span>{item.name}</span>
+                  <span className="text-gray-500">{item.weight} g</span>
+                </li>
+              ))}
+            </ul>
+
+          {/* Button that changes the state back to false and closes the window */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="w-full bg-gray-200 text-gray-800 font-bold py-2 rounded hover:bg-gray-300"
+          >
+            Close Window
+          </button>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <h2 className="text-2xl my-5 font-bold">Testing the Modal</h2>
+
+        <div className="flex gap-4">
+        <button
+          className="bg-blue-800 text-white font-bold p-4 rounded hover:bg-blue-700"
+          onClick={() => setShowInfo(true)}
+        >
+          Show Details
+        </button>
+        <Modal isOpen={showInfo} onClose={() => setShowInfo(false)}>This is content injected inside the modal!</Modal>
+
+        <button
+          className="bg-cyan-800 text-white font-bold p-4 rounded hover:bg-cyan-700"
+          onClick={() => setShowInfo2(true)}
+        >
+          Show Other Details
+        </button>
+        <Modal isOpen={showInfo2} onClose={() => setShowInfo2(false)}>This is some other content injected into a modal!</Modal>
+        </div>
+      </div>
+    </div>
+
+    
+    
+  );
+}
