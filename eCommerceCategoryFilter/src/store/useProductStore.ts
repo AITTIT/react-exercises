@@ -21,7 +21,7 @@ export const useProductStore = create<productsStore>((set) => ({
     } catch (error) {
       console.error("Failed loading data", error);
     } finally {
-      set({ isLoading: false })
+      set({ isLoading: false });
     }
   },
 

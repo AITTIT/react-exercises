@@ -1,5 +1,7 @@
+import CategoryFilter from "./components/CategoryFilter";
+
 function App() {
-  return <h1>New title</h1>;
+  return <CategoryFilter />
 }
 
 export default App
